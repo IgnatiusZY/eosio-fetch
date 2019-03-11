@@ -1,0 +1,23 @@
+{
+  "name": "eosio-fetch",
+  "version": "1.0.0",
+  "description": "Table Row Scanner",
+  "main": "scope_scanner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ignatiusrevi/eosio-fetch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ignatiusrevi/eosio-fetch/issues"
+  },
+  "homepage": "https://github.com/ignatiusrevi/eosio-fetch#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "node-fetch": "^2.3.0"
+  }
+}
