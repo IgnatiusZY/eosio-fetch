@@ -8,14 +8,15 @@ const fs = require('fs');
 let initTime, endTime;
 let intervalTimer;
 let accounts = new Set();
-let is_set = false;
+// let is_set = false;
 let counter = 0;
 let lastSize = 0;
-const unclaimed = new Set();
-const claimed = new Set();
-let total_unclaimed_amount = 0;
-let total_claimed_amount = 0;
-const unclaimed_list = './unclaimed.txt';
+// const unclaimed = new Set();
+// const claimed = new Set();
+// let total_unclaimed_amount = 0;
+// let total_claimed_amount = 0;
+const unclaimed_list = './accounts.txt';
+// const unclaimed_list = './unclaimed.txt';
 if (fs.existsSync(unclaimed_list)) {
     fs.unlinkSync(unclaimed_list);
 }
@@ -87,23 +88,28 @@ async function processTableRow(account) {
         headers: {'Content-Type': 'application/json'},
     });
     const result = (await response.json()).rows[0];
-    const balance = parseFloat(result['balance'].split(" ")[0]);
-    if (result['claimed'] === 0) {
-        unclaimed.add(account);
-        total_unclaimed_amount += balance;
-        unclaimedList.write(account + "," + balance + '\n');
-    } else {
-        claimed.add(account);
-        total_claimed_amount += balance;
+    if (result) {
+        const balance = parseFloat(result['balance'].split(" ")[0]);
+        if (balance > 10) {
+            unclaimedList.write(account + "," + balance + '\n');
+        }
     }
+    // if (result['claimed'] === 0) {
+    //     unclaimed.add(account);
+    //     total_unclaimed_amount += balance;
+    //     unclaimedList.write(account + "," + balance + '\n');
+    // } else {
+    //     claimed.add(account);
+    //     total_claimed_amount += balance;
+    // }
 }
 
 function stopScanning() {
     console.log('Iteration is over!');
     endTime = Date.now();
     console.log(`${accounts.size} entries scanned in ${(endTime - initTime) / 1000} seconds!`);
-    console.log(`Total Claimed balance:   ${total_claimed_amount.toFixed(4)} from ${claimed.size} accounts`);
-    console.log(`Total Unclaimed balance: ${total_unclaimed_amount.toFixed(4)} from ${unclaimed.size} accounts`);
+    // console.log(`Total Claimed balance:   ${total_claimed_amount.toFixed(4)} from ${claimed.size} accounts`);
+    // console.log(`Total Unclaimed balance: ${total_unclaimed_amount.toFixed(4)} from ${unclaimed.size} accounts`);
     console.log('---------------- End ---------------------');
     clearInterval(intervalTimer);
     is_set = true;

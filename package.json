@@ -4,6 +4,7 @@
   "description": "Table Row Scanner",
   "main": "scope_scanner.js",
   "scripts": {
+    "start": "node scope_scanner.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
