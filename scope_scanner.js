@@ -15,7 +15,7 @@ let lastSize = 0;
 // const claimed = new Set();
 // let total_unclaimed_amount = 0;
 // let total_claimed_amount = 0;
-const unclaimed_list = './accounts.txt';
+const unclaimed_list = './accounts3.txt';
 // const unclaimed_list = './unclaimed.txt';
 if (fs.existsSync(unclaimed_list)) {
     fs.unlinkSync(unclaimed_list);
