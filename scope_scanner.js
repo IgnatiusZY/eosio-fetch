@@ -1,7 +1,7 @@
-const total_accounts = 10000000;
+const total_accounts = 1000000000000000000;
 const contract = 'emanateoneos';
 const table_name = 'accounts';
-const eos_api = "http://node1.eosphere.io";
+const eos_api = "http://localhost:8888";
 
 const fetch = require('node-fetch');
 const fs = require('fs');
@@ -90,7 +90,7 @@ async function processTableRow(account) {
     const result = (await response.json()).rows[0];
     if (result) {
         const balance = parseFloat(result['balance'].split(" ")[0]);
-        if (balance > 10) {
+	if (balance > 10) {
             unclaimedList.write(account + "," + balance + '\n');
         }
     }
